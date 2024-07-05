@@ -1,0 +1,10 @@
+# -*- coding: utf-8 -*-
+# UTF-8 encoding when using korean
+user_input = input()
+user_input = user_input.split(" ")
+first = eval(user_input[0])
+second = eval(user_input[1])
+
+
+result = first if first >= second else second
+print (result)
