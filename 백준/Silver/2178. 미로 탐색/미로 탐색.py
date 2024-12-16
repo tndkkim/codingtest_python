@@ -2,12 +2,13 @@ from collections import deque
 
 n, m = map(int, input().split())
 graph = [list(map(int, input().strip())) for _ in range(n)]
+min_ans = float('inf')
 
 def BFS(graph, start_node):
     visited = [[0] * m for _ in range(n)]
     need_visit = deque([start_node])
     x, y = start_node
-    visited[x][y] = 1 
+    visited[x][y] = 1
     
     while need_visit:
         node = need_visit.popleft()
@@ -29,12 +30,15 @@ def DFS(graph, start_node):
     visited = [[0] * m for _ in range(n)]
     need_visit = [start_node]
     visited[0][0] = 1
+    global min_ans
 
     while need_visit:
         x, y = need_visit.pop()
 
-        if x== n-1 and y == m-1:
-            return visited[x][y]
+        if x == n-1 and y == m-1:  
+           min_ans = min(min_ans, visited[x][y])
+           return visited[x][y]
+        
         for dx, dy in [(1, 0), (-1,0), (0,1), (0,-1)]:
             nx = x + dx
             ny =  y + dy
@@ -42,7 +46,7 @@ def DFS(graph, start_node):
                 if graph[nx][ny] == 1 and not visited[nx][ny]:
                     visited[nx][ny] = visited[x][y] + 1
                     need_visit.append((nx, ny))
-    return visited[n-1][m-1]
+    return 0
 
 #print(DFS(graph, (0, 0)))
 
