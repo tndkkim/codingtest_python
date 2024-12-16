@@ -34,16 +34,12 @@ for i in range(N, K):
             
     #모두 나중에 사용되는 경우
     if remove in names[i:]:
-        latest_idx = 0
+        latest_idx = 0 #제일 나중에 사용되는는
         for j in use:
-            try:
-                next_idx = names[i:].index(j)
-                if next_idx > latest_idx:
-                    latest_idx = next_idx
-                    remove = j
-            except ValueError:
+            next_idx = names[i:].index(j)
+            if next_idx > latest_idx:
+                latest_idx = next_idx
                 remove = j
-                break
     
     #바꾸기
     use[use.index(remove)] = names[i]
