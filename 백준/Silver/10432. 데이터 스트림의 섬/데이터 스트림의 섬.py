@@ -9,16 +9,18 @@ num = int(input())
 for i in range(num):
     T = list(map(int, input().split()))
     T.pop(0)
-    n = len(T)
+    stack = [0]
     count = 0
-    for start in range(1, n-1):
-        for end in range(start, n-1):
-            sub = T[start:end+1]
-            left = T[start-1]
-            right = T[end+1]
-            if all(x > left for x in sub) and all(x > right for x in sub):
+    for t in T:
+        if t > stack[-1]:
+            stack.append(t)
+            count += 1
+        elif t == stack[-1]:
+            continue
+        else:
+            while stack[-1] > t:
+                stack.pop()
+            if stack[-1] < t:
+                stack.append(t)
                 count += 1
     print(i+1, count)
-                
-        
-    
